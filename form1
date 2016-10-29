@@ -36,7 +36,7 @@ namespace DarmoweSMSy
                 string url = "http://smsc.vianett.no/v3/send.ashx?" +
                     "src=" + pudelkonatelefon.Text + "&" +
                     "dst=" + pudelkonatelefon.Text + "&" +
-                    "msg=" + System.Web.HttpUtility.UrlEncode(pudelkonaatresc.Text, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "" +
+                    "msg=" + System.Web.HttpUtility.UrlEncode(pudelkonaatresc.Text, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "&" +
                     "username=" + System.Web.HttpUtility.UrlEncode(pudelkonauzytkowanika.Text) + "&" +
                     "password=" + System.Web.HttpUtility.UrlEncode(pudelkonahaslo.Text);
                 string wynik = client.DownloadString(url);
