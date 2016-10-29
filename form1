@@ -30,14 +30,19 @@ namespace DarmoweSMSy
 
         private void przyciskwyslij_Click(object sender, EventArgs e)
         {
-            using (System.Net.WebClient client = new System.Net.WebClient()) ;
+            using (System.Net.WebClient client = new System.Net.WebClient());
             try
             {
-                
+                string url = "http://smsc.vianett.no/v3/send.ashx?" +
+                    "src=" + pudelkonatelefon.Text + "&" +
+                    "dst=" + pudelkonatelefon.Text + "&" +
+                    "msg=" + System.Web.HttpUtility.UrlEncode(pudelkonaatresc.Text, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "" +
+                    "username=" + System.Web.HttpUtility.UrlEncode(pudelkonauzytkowanika.Text) + "&" +
+                    "password=" + System.Web.HttpUtility.UrlEncode(pudelkonahaslo.Text);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
