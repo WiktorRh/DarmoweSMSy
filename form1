@@ -30,7 +30,7 @@ namespace DarmoweSMSy
 
         private void przyciskwyslij_Click(object sender, EventArgs e)
         {
-            using (System.Net.WebClient client = new System.Net.WebClient());
+            using (System.Net.WebClient client = new System.Net.WebClient())
             try
             {
                 string url = "http://smsc.vianett.no/v3/send.ashx?" +
@@ -39,6 +39,11 @@ namespace DarmoweSMSy
                     "msg=" + System.Web.HttpUtility.UrlEncode(pudelkonaatresc.Text, System.Text.Encoding.GetEncoding("ISO-8859-1")) + "" +
                     "username=" + System.Web.HttpUtility.UrlEncode(pudelkonauzytkowanika.Text) + "&" +
                     "password=" + System.Web.HttpUtility.UrlEncode(pudelkonahaslo.Text);
+                string wynik = client.DownloadString(url);
+                    if (wynik.Contains("OK"))
+                        MessageBox.Show("Udało sie wysłać SMSa za fee!!!", "Wiadomość", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Nie udalo sie wysłac darmowego SMSa...");
             }
             catch (Exception ex)
             {
