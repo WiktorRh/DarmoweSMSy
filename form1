@@ -16,18 +16,12 @@ namespace DarmoweSMSy
         public GlowneOkno()
         {
             InitializeComponent();
+            pudelkonahaslo.PasswordChar = '*';
+            pudelkonahaslo.MaxLength = 10;
+            pudelkonaatresc.MaxLength = 140;
         }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
+       
+        
         private void przyciskwyslij_Click(object sender, EventArgs e)
         {
             using (System.Net.WebClient client = new System.Net.WebClient())
@@ -49,6 +43,17 @@ namespace DarmoweSMSy
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void pudelkonauzytkowanika_TextChanged(object sender, EventArgs e)
+        {
+            Dictionary<string, string> numerytel = new Dictionary<string, string>();
+            numerytel.Add("wikiex", "haslo1234");
+        }
+
+        private void pudelkonahaslo_TextChanged(object sender, EventArgs e)
+        {
         }
     }
 }
