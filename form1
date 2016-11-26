@@ -1,13 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Web;
+using System.IO;
 
 namespace DarmoweSMSy
 {
@@ -54,6 +49,106 @@ namespace DarmoweSMSy
 
         private void pudelkonahaslo_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void add_to_favourite_Click(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add(pudelkonauzytkowanika.Text);
+        }
+
+        private void del_from_favourites_Click(object sender, EventArgs e)
+        {
+            comboBox1.Items.Remove(pudelkonauzytkowanika.Text);
+        }
+
+        private void exit_program_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void wyjścieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+
+        }
+
+        private void oMnieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Witam, jestem prostym programem do wysyłania darmowych wiadomości SMS na cały świat"
+                + "za pośrednictwem strony internetowej https://www.vianett.com \n"
+                +"Autorem jest znany i lubiany Wiktor Roch");
+        }
+
+        private void Tlo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void czcionkaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fontDialog1.ShowDialog();
+            przyciskwyslij.Font = new Font(fontDialog1.Font.Name, fontDialog1.Font.Size);
+            exit_program.Font = fontDialog1.Font;
+            pudelkonaatresc.Font = fontDialog1.Font;
+            pudelkonatelefon.Font = fontDialog1.Font;
+            pudelkonauzytkowanika.Font = fontDialog1.Font;
+            label1.Font = fontDialog1.Font;
+            label2.Font = fontDialog1.Font;
+            label3.Font = fontDialog1.Font;
+            etykietatresc.Font = fontDialog1.Font;
+            add_to_favourite.Font = fontDialog1.Font;
+            del_from_favourites.Font = fontDialog1.Font;
+
+        }
+
+        private void kolorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+            przyciskwyslij.BackColor = colorDialog1.Color;
+            exit_program.BackColor = colorDialog1.Color;
+            add_to_favourite.BackColor = colorDialog1.Color;
+            del_from_favourites.BackColor = colorDialog1.Color;
+
+        }
+
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+            string filename = saveFileDialog1.FileName+".txt";
+            File.WriteAllText(filename, pudelkonaatresc.Text);
+        }
+
+        private void otwórzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            pudelkonaatresc.Text = File.ReadAllText(openFileDialog1.FileName);
+
+        }
+
+        private void przyciskZamknieciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            exit_program.Hide();
+        }
+        private void listeUlubionychToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comboBox1.Hide();
+            use_this.Hide();
+        }
+
+        private void przyciskZamknięciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            exit_program.Show();
+        }
+
+        private void listeUlubionychToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            comboBox1.Show();
+            use_this.Show();
+        }
+
+        private void use_this_Click(object sender, EventArgs e)
+        {
+            pudelkonauzytkowanika.Text = comboBox1.Text;
         }
     }
 }
