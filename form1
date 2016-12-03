@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
@@ -15,12 +14,11 @@ namespace DarmoweSMSy
             pudelkonahaslo.MaxLength = 10;
             pudelkonaatresc.MaxLength = 140;
         }
-       
         
         private void przyciskwyslij_Click(object sender, EventArgs e)
         {
             using (System.Net.WebClient client = new System.Net.WebClient())
-            try
+            try //poniższy kod wysyła podane wartości do strony
             {
                 string url = "http://smsc.vianett.no/v3/send.ashx?" +
                     "src=" + pudelkonatelefon.Text + "&" +
@@ -38,17 +36,17 @@ namespace DarmoweSMSy
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            if (checkBox1.Checked == true)
+            {
+                //zapis tresci wiadomosci na pulpicie w pliku tekstowym, kazda wiadomosc od nowej linii
+                FileStream Adres_i_rodzaj_zapisu = new FileStream("C:\\Users\\" + Environment.UserName + "\\Desktop\\Skrzynka Nadawcza.txt", FileMode.Append, FileAccess.Write);
+                StreamWriter Plik = new StreamWriter(Adres_i_rodzaj_zapisu);
+                Plik.WriteLine(pudelkonaatresc.Text);
+                Plik.Close();
+                Adres_i_rodzaj_zapisu.Close();
+                MessageBox.Show("Kopia wiadomości zapisiała sie na pulpicie w folderze Skrzynka Nadawcza.");
+            }
 
-        }
-
-        private void pudelkonauzytkowanika_TextChanged(object sender, EventArgs e)
-        {
-            Dictionary<string, string> numerytel = new Dictionary<string, string>();
-            numerytel.Add("wikiex", "haslo1234");
-        }
-
-        private void pudelkonahaslo_TextChanged(object sender, EventArgs e)
-        {
         }
 
         private void add_to_favourite_Click(object sender, EventArgs e)
@@ -69,7 +67,6 @@ namespace DarmoweSMSy
         private void wyjścieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-
         }
 
         private void oMnieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,11 +74,6 @@ namespace DarmoweSMSy
             MessageBox.Show("Witam, jestem prostym programem do wysyłania darmowych wiadomości SMS na cały świat"
                 + "za pośrednictwem strony internetowej https://www.vianett.com \n"
                 +"Autorem jest znany i lubiany Wiktor Roch");
-        }
-
-        private void Tlo_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void czcionkaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,7 +90,8 @@ namespace DarmoweSMSy
             etykietatresc.Font = fontDialog1.Font;
             add_to_favourite.Font = fontDialog1.Font;
             del_from_favourites.Font = fontDialog1.Font;
-
+            checkBox1.Font = fontDialog1.Font;
+            use_this.Font = fontDialog1.Font;
         }
 
         private void kolorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,7 +101,11 @@ namespace DarmoweSMSy
             exit_program.BackColor = colorDialog1.Color;
             add_to_favourite.BackColor = colorDialog1.Color;
             del_from_favourites.BackColor = colorDialog1.Color;
-
+            pudelkonaatresc.BackColor = colorDialog1.Color;
+            pudelkonahaslo.BackColor = colorDialog1.Color;
+            pudelkonatelefon.BackColor = colorDialog1.Color;
+            pudelkonauzytkowanika.BackColor = colorDialog1.Color;
+            comboBox1.BackColor = colorDialog1.Color;
         }
 
         private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
@@ -122,7 +119,6 @@ namespace DarmoweSMSy
         {
             openFileDialog1.ShowDialog();
             pudelkonaatresc.Text = File.ReadAllText(openFileDialog1.FileName);
-
         }
 
         private void przyciskZamknieciaToolStripMenuItem_Click(object sender, EventArgs e)
